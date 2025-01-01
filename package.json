@@ -6,7 +6,9 @@
   "scripts": {
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
-    "copy-resources": "cpy src/static/**/* dist/static --parents",
+    "copy-pages": "cpy src/static/**/* dist/static --parents",
+    "copy-pictures": "cpy images/**/* dist/images --parents",
+    "copy-resources": "yarn copy-pages && yarn copy-pictures",
     "build": "yarn format && yarn lint && yarn copy-resources && tsc",
     "start": "node dist/index.js",
     "prepare": "husky",

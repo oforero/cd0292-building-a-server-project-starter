@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello TypeScript</title>
+  </head>
+  <body>
+    <h1>Welcome to the Hello TypeScript Web Service</h1>
+    <button id="fetchMessage">Fetch Hello Message</button>
+    <p id="message"></p>
+
+    <script>
+      document
+        .getElementById('fetchMessage')
+        .addEventListener('click', async () => {
+          const response = await fetch('/hello');
+          const data = await response.json();
+          document.getElementById('message').innerText = data.message;
+        });
+    </script>
+  </body>
+</html>

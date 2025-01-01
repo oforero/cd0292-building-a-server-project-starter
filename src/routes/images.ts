@@ -9,6 +9,26 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Get a list of all available images
+router.get('/list', (req, res) => {
+  const imagesDir = path.join(__dirname, '../images');
+
+  fs.readdir(imagesDir, (err, files) => {
+    if (err) {
+      console.error('Error reading images directory:', err);
+      res.status(500).json({ error: 'Unable to fetch images' });
+      return;
+    }
+
+    // Filter for image files (e.g., .jpg, .png)
+    const imageFiles = files.filter((file) =>
+      /\.(jpg|jpeg|png|gif)$/i.test(file)
+    );
+
+    res.json(imageFiles);
+  });
+});
+
 // Serve an image dynamically based on the filename
 router.get('/:imagename', (req, res) => {
   const { imagename } = req.params;

@@ -3,21 +3,80 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello TypeScript</title>
+    <title>Image Viewer</title>
+    <style>
+      #carousel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px auto;
+      }
+      #carousel img {
+        max-width: 100%;
+        max-height: 400px;
+        display: none;
+      }
+      #carousel img.active {
+        display: block;
+      }
+      .navigation {
+        cursor: pointer;
+        font-size: 24px;
+        user-select: none;
+        margin: 0 10px;
+      }
+    </style>
   </head>
   <body>
-    <h1>Welcome to the Hello TypeScript Web Service</h1>
-    <button id="fetchMessage">Fetch Hello Message</button>
-    <p id="message"></p>
+    <h1>Image Viewer</h1>
+    <div id="carousel">
+      <span id="prev" class="navigation">⬅️</span>
+      <img id="image-display" src="" alt="Image Viewer" />
+      <span id="next" class="navigation">➡️</span>
+    </div>
 
     <script>
-      document
-        .getElementById('fetchMessage')
-        .addEventListener('click', async () => {
-          const response = await fetch('/hello');
-          const data = await response.json();
-          document.getElementById('message').innerText = data.message;
-        });
+      let currentIndex = 0;
+      let images = [];
+
+      async function fetchAvailableImagesList() {
+        try {
+          // Fetch the list of images
+          const response = await fetch('/images/list');
+          images = await response.json();
+          console.info('Got list of images: ', images);
+          if (images.length > 0) {
+            updateImage();
+          }
+        } catch (error) {
+          console.error('Failed to fetch images:', error);
+        }
+      }
+
+      function updateImage() {
+        const imageDisplay = document.getElementById('image-display');
+        imageDisplay.src = `/images/${images[currentIndex]}`;
+        imageDisplay.class = 'active';
+
+        if (!imageDisplay.classList.contains('active')) {
+          imageDisplay.classList.add('active');
+        }
+      }
+
+      document.getElementById('prev').addEventListener('click', () => {
+        if (images.length === 0) return;
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateImage();
+      });
+
+      document.getElementById('next').addEventListener('click', () => {
+        if (images.length === 0) return;
+        currentIndex = (currentIndex + 1) % images.length;
+        updateImage();
+      });
+
+      // Fetch images on page load
+      fetchAvailableImagesList();
     </script>
   </body>
 </html>

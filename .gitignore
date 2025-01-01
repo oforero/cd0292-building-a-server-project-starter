@@ -1,0 +1,47 @@
+# Node.js Dependencies
+node_modules/
+
+# TypeScript Build Artifacts
+dist/
+build/
+*.js
+*.js.map
+*.d.ts
+
+# Logs and Debugging Files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Environment Files
+.env
+.env.*.local
+
+# Nix-specific Files
+*.drv
+result/
+.nix-defexpr/
+.nix-gcroots/
+.nix-profile/
+.nix-store/
+.nix-channels/
+
+# OS-Specific Files
+.DS_Store
+Thumbs.db
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Miscellaneous
+coverage/       # Output of code coverage tools
+.cache/         # Cache directories
+*.tgz           # Compressed files
+*.bak           # Backup files
+*.tmp           # Temporary files

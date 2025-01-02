@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import helloRouter from './routes/hello.js';
 import imageRouter from './routes/images.js';
+import resizeRouter from './routes/resize.js';
 
 const app = express();
 const PORT = 3000;
@@ -17,6 +18,7 @@ app.use(express.static(path.join(__dirname, 'static')));
 // Add the /hello route
 app.use('/hello', helloRouter);
 app.use('/images', imageRouter);
+app.use('/resize', resizeRouter);
 
 // Start the server
 app.listen(PORT, () => {

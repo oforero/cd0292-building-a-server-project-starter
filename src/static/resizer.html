@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Resizer</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        max-width: 600px;
+      }
+      img {
+        display: block;
+        margin: 20px 0;
+        max-width: 100%;
+        border: 1px solid #ccc;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      label {
+        font-weight: bold;
+      }
+      input[type='text'],
+      input[type='number'],
+      button {
+        padding: 10px;
+        font-size: 16px;
+      }
+      #thumbnail-container {
+        margin-top: 20px;
+      }
+      #thumbnail-container input {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Image Resizer</h1>
+
+    <div id="carousel">
+      <img id="image-display" src="" alt="Image Viewer" />
+      <span id="prev" class="navigation">⬅️</span>
+      <span id="next" class="navigation">➡️</span>
+    </div>
+
+    <form id="resize-form">
+      <label for="filename">Image Filename:</label>
+      <input
+        type="text"
+        id="filename"
+        placeholder="e.g., image1.jpg"
+        required
+      />
+
+      <label for="width">Width (px):</label>
+      <input type="number" id="width" placeholder="e.g., 200" required />
+
+      <label for="height">Height (px):</label>
+      <input type="number" id="height" placeholder="e.g., 300" required />
+
+      <button type="submit">Resize Image</button>
+    </form>
+
+    <div id="thumbnail-container" style="display: none">
+      <h2>Thumbnail</h2>
+      <img id="thumbnail" src="" alt="Thumbnail" />
+      <label for="thumbnail-url">Thumbnail URL:</label>
+      <input type="text" id="thumbnail-url" readonly />
+    </div>
+
+    <script src="utilities.js"></script>
+
+    <script>
+      let currentIndex = 0;
+      var images = [];
+
+      fetchAvailableImagesList().then(function (result) {
+        console.info('Fetched images: ', result);
+        images = result;
+        if (images.length > 0) {
+          updateImage('image-display', images[currentIndex]);
+        }
+      });
+
+      document.getElementById('prev').addEventListener('click', () => {
+        if (images.length === 0) return;
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateImageAndName('filename', 'image-display', images[currentIndex]);
+      });
+
+      document.getElementById('next').addEventListener('click', () => {
+        if (images.length === 0) return;
+        currentIndex = (currentIndex + 1) % images.length;
+        updateImageAndName('filename', 'image-display', images[currentIndex]);
+      });
+
+      document
+        .getElementById('resize-form')
+        .addEventListener('submit', async (event) => {
+          event.preventDefault(); // Prevent form submission
+
+          const filename = document.getElementById('filename').value;
+          const width = document.getElementById('width').value;
+          const height = document.getElementById('height').value;
+
+          // Build the URL for the resized image
+          const thumbnailUrl = `/resize/${filename}?width=${width}&height=${height}`;
+
+          // Update the thumbnail container
+          const thumbnailContainer = document.getElementById(
+            'thumbnail-container'
+          );
+          const thumbnail = document.getElementById('thumbnail');
+          const thumbnailUrlInput = document.getElementById('thumbnail-url');
+
+          thumbnail.src = thumbnailUrl;
+          thumbnailUrlInput.value = `${window.location.origin}${thumbnailUrl}`;
+
+          // Show the thumbnail container
+          thumbnailContainer.style.display = 'block';
+        });
+    </script>
+  </body>
+</html>

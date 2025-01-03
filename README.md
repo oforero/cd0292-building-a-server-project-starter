@@ -55,7 +55,12 @@ This project provides a simple Node.js web server with the following features:
 
 6. Open your browser and navigate to:
    - **Gallery Page**: [http://localhost:3000](http://localhost:3000)
+
+      ![image](udacity-typescript-image-project-screenshot-1.jpg)
+
    - **Resizer Page**: [http://localhost:3000/resize.html](http://localhost:3000/resize.html)
+
+      ![image](udacity-typescript-image-project-screenshot-2.jpg)
 
 ### For Non-Nix Users
 
@@ -83,6 +88,14 @@ This project provides a simple Node.js web server with the following features:
 5. Open your browser and navigate to:
    - **Gallery Page**: [http://localhost:3000](http://localhost:3000)
    - **Resizer Page**: [http://localhost:3000/resize.html](http://localhost:3000/resize.html)
+
+### Running The Tests
+
+1. The image resize caching contains Jasmine tests, this are runin using:
+
+   ```bash
+   yarn test
+   ```
 
 ---
 

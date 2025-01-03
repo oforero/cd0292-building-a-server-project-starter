@@ -39,6 +39,12 @@ async function imageResizer(req: Request, res: Response): Promise<void> {
     const parsedWidth = parseInt(width as string, 10);
     const parsedHeight = parseInt(height as string, 10);
 
+    const originalImagePath = path.join(imagesDir, filename);
+    if (!fs.existsSync(originalImagePath)) {
+      res.status(404).send("Image doesn't exist");
+      return;
+    }
+
     if (isNaN(parsedWidth) || isNaN(parsedHeight)) {
       res.status(400).send('Width and height must be valid numbers');
       return;

@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import path from 'path';
 import fs from 'fs';
-import sharp from 'sharp';
+import { resizeImage } from '../utilities/imageManipulation.js';
 
 const router = Router();
 
@@ -44,31 +44,17 @@ async function imageResizer(req: Request, res: Response): Promise<void> {
       return;
     }
 
-    const originalImagePath = path.join(imagesDir, filename);
-    const resizedImagePath = path.join(
+    // Resize the image using Sharp
+    const resized = await resizeImage(
       thumbnailsDir,
-      `${parsedWidth}x${parsedHeight}-${filename}`
+      imagesDir,
+      filename,
+      parsedWidth,
+      parsedHeight
     );
 
-    // Check if the original image exists
-    if (!fs.existsSync(originalImagePath)) {
-      res.status(404).send('Original image not found');
-      return;
-    }
-
-    // Check if the resized image already exists
-    if (fs.existsSync(resizedImagePath)) {
-      res.sendFile(resizedImagePath);
-      return;
-    }
-
-    // Resize the image using Sharp
-    await sharp(originalImagePath)
-      .resize(parsedWidth, parsedHeight)
-      .toFile(resizedImagePath);
-
-    console.log(`Resized image saved to: ${resizedImagePath}`);
-    res.sendFile(resizedImagePath);
+    console.log(`Resized image saved to: ${resized.resizedImagePath}`);
+    res.sendFile(resized.resizedImagePath);
   } catch (error) {
     console.error('Error resizing image:', error);
     res.status(500).send('Error processing the image');

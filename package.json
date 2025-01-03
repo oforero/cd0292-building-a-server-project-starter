@@ -10,7 +10,7 @@
     "copy-pictures": "cpy images/**/* dist/images --parents",
     "copy-resources": "yarn copy-pages && yarn copy-pictures",
     "build": "yarn format && yarn lint && yarn copy-resources && tsc",
-    "start": "node dist/index.js",
+    "start": "yarn build && node dist/index.js",
     "prepare": "husky",
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts"
   },

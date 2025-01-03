@@ -99,19 +99,38 @@ This project provides a simple Node.js web server with the following features:
 
 ---
 
-## Usage
+## How to review
+
+### Endpoints
+
+1. The image endpoint has different options:
+
+1.1. Endpoint listing the existing images: [http://localhost:3000/images/list](http://localhost:3000/images/list).
+1.2. Endpoint showing an image: [http://localhost:3000/images/:imagename](http://localhost:3000/images/:imagename).
+  - Note the image name is passed as part of the URL and not as a parameter, I think this is a better API design
+1.3. Endpoint showing an resized image: [http://localhost:3000/resize/:imagename?width=300&height=200](http://localhost:3000/images/:imagename?width=300&height=200).
+  - It is a different endpoint as the image one, and it implement the requested caching behaviour.
+  - it also takes the image name as part of the URL, not as a parameter.
 
 ### **Gallery Page**
 The gallery page displays all the images in the `images` folder. Simply navigate to [http://localhost:3000](http://localhost:3000) to view the available images.
+
+  ![image](udacity-typescript-image-project-screenshot-1.jpg)
 
 ### **Image Resizer Page**
 The resizer tool allows users to input the dimensions for resizing an image:
 
 1. Navigate to the Resizer Page: [http://localhost:3000/resize.html](http://localhost:3000/resize.html).
-2. Enter the filename of an image (e.g., `image1.jpg`).
+
+    ![image](udacity-typescript-image-project-screenshot-2.jpg)
+
+2. Enter the filename of an image (e.g., `encenadaport.jpg`).
 3. Enter the desired `width` and `height` in pixels.
 4. Click "Resize Image."
 5. The resized image will be displayed below the form, along with the URL to fetch the thumbnail directly.
+6. The URL of the resized image will be printed in a text box (e.g., `http://localhost:3000/resize/encenadaport.jpg?width=300&height=200`) under the Thumbnail,
+   this URL can be used to reuse the thumbnail in other pages
+
 
 ---
 

@@ -111,5 +111,5 @@
     /* Skip type checking all .d.ts files. */
     "skipLibCheck": true
   },
-  "exclude": ["node_modules"] // Exclude node_modules from compilation
+  "exclude": ["node_modules", "./dist", "spec"]
 }

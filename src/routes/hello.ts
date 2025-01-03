@@ -1,9 +1,11 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
 
 const router = Router();
 
-router.get('/', (req, res) => {
+function defaultHandler(_: Request, res: Response): void {
   res.json({ message: 'Hello, Express using TypeScript!' });
-});
+}
+
+router.get('/', defaultHandler);
 
 export default router;

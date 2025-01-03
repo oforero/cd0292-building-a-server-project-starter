@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
 import path from 'path';
 import fs from 'fs';
 import sharp from 'sharp';
@@ -18,7 +18,7 @@ if (!fs.existsSync(thumbnailsDir)) {
 }
 
 // Resize and serve an image
-router.get('/:filename', async (req, res) => {
+async function imageResizer(req: Request, res: Response): Promise<void> {
   try {
     const { filename } = req.params;
     const { width, height } = req.query;
@@ -73,6 +73,8 @@ router.get('/:filename', async (req, res) => {
     console.error('Error resizing image:', error);
     res.status(500).send('Error processing the image');
   }
-});
+}
+
+router.get('/:filename', imageResizer);
 
 export default router;

@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
 import path from 'path';
 import fs from 'fs';
 
@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Get a list of all available images
-router.get('/list', (req, res) => {
+function listImagesHandler(req: Request, res: Response): void {
   const imagesDir = path.join(__dirname, '../images');
 
   fs.readdir(imagesDir, (err, files) => {
@@ -27,10 +27,10 @@ router.get('/list', (req, res) => {
 
     res.json(imageFiles);
   });
-});
+}
 
 // Serve an image dynamically based on the filename
-router.get('/:imagename', (req, res) => {
+function serveImageHandler(req: Request, res: Response): void {
   const { imagename } = req.params;
   const imagePath = path.join(__dirname, '../images', imagename);
 
@@ -45,6 +45,9 @@ router.get('/:imagename', (req, res) => {
     // Serve the image file
     res.sendFile(imagePath);
   });
-});
+}
+
+router.get('/list', listImagesHandler);
+router.get('/:imagename', serveImageHandler);
 
 export default router;

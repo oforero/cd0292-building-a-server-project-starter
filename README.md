@@ -103,6 +103,8 @@ This project provides a simple Node.js web server with the following features:
 
 ### Endpoints
 
+** To avoid further misunderstandings I mapped the resizer to the `/images` endpoint,
+   and added a new endpoint to show the original pictures `/original`  **
 1. The image endpoint has different options:
 
 1.1. Endpoint listing the existing images: [http://localhost:3000/images/list](http://localhost:3000/images/list).

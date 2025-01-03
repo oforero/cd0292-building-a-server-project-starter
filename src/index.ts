@@ -17,7 +17,8 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 // Add the /hello route
 app.use('/hello', helloRouter);
-app.use('/images', imageRouter);
+app.use('/original', imageRouter);
+app.use('/images', resizeRouter);
 app.use('/resize', resizeRouter);
 
 // Start the server

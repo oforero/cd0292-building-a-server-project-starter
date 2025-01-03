@@ -17,6 +17,8 @@ if (!fs.existsSync(thumbnailsDir)) {
   fs.mkdirSync(thumbnailsDir);
 }
 
+const isPositiveInteger = (value: string): boolean => /^\d+$/.test(value);
+
 // Resize and serve an image
 async function imageResizer(req: Request, res: Response): Promise<void> {
   try {
@@ -33,6 +35,14 @@ async function imageResizer(req: Request, res: Response): Promise<void> {
     );
     if (!width || !height) {
       res.status(400).send('Width and height query parameters are required');
+      return;
+    }
+
+    if (
+      !isPositiveInteger(width as string) ||
+      !isPositiveInteger(height as string)
+    ) {
+      res.status(400).send('Width and height must be valid positive integers');
       return;
     }
 

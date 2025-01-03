@@ -65,4 +65,15 @@ describe('Resizer Endpoint', () => {
       'Width and height query parameters are required'
     );
   });
+
+  it('should return 400 for bad query parameters', async () => {
+    const response = await request(app)
+      .get(`/resize/${testImage}?width=-650&height=500`)
+      .query({});
+
+    expect(response.status).toBe(400);
+    expect(response.text).toBe(
+      'Width and height must be valid positive integers'
+    );
+  });
 });

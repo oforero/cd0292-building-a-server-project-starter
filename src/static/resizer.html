@@ -41,6 +41,22 @@
   <body>
     <h1>Image Resizer</h1>
 
+    <div class="container">
+      <h1>JPG Image Upload</h1>
+      <form
+        id="uploader"
+        method="post"
+        enctype="multipart/form-data"
+        action="http://localhost:3000/original/upload"
+      >
+        <div>
+          <label for="file">Select JPG image</label>
+          <input name="jpg" type="file" accept="image/jpeg" />
+        </div>
+        <button type="submit">Upload</button>
+      </form>
+    </div>
+
     <div id="carousel">
       <img id="image-display" src="" alt="Image Viewer" />
       <span id="prev" class="navigation">⬅️</span>
@@ -123,6 +139,54 @@
           // Show the thumbnail container
           thumbnailContainer.style.display = 'block';
         });
+    </script>
+    <script>
+      const uploader = document.getElementById('uploader');
+      uploader.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(uploader);
+        const uploadedFile = formData.get('jpg');
+
+        try {
+          const response = await fetch(
+            'http://localhost:3000/original/upload',
+            {
+              method: 'POST',
+              body: formData,
+            }
+          );
+
+          if (response.ok) {
+            console.info('Upload successful');
+            // Refetch the images and set the uploaded one as current
+            const newImageList = await fetchAvailableImagesList();
+            images = newImageList;
+
+            const uploadedName = uploadedFile.name;
+            const matchingIndex = images.findIndex(
+              (name) => name === uploadedName
+            );
+
+            if (matchingIndex !== -1) {
+              currentIndex = matchingIndex;
+              updateImageAndName(
+                'filename',
+                'image-display',
+                images[currentIndex]
+              );
+            } else {
+              console.warn(
+                `Uploaded image "${uploadedName}" not found in image list`
+              );
+            }
+          } else {
+            console.error('Upload failed', await response.text());
+          }
+        } catch (err) {
+          console.error('Error uploading image:', err);
+        }
+      });
     </script>
   </body>
 </html>

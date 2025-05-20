@@ -85,12 +85,12 @@ This project provides a simple Node.js web server with the following features:
   - It is a different endpoint as the image one, and it implement the requested caching behaviour.
   - it also takes the image name as part of the URL, not as a parameter.
 
-### **Gallery Page**
+### Gallery Page
 The gallery page displays all the images in the `images` folder. Simply navigate to [http://localhost:3000](http://localhost:3000) to view the available images.
 
   ![image](udacity-typescript-image-project-screenshot-1.jpg)
 
-### **Image Resizer Page**
+### Image Resizer Page
 The resizer tool allows users to input the dimensions for resizing an image:
 
 1. Navigate to the Resizer Page: [http://localhost:3000/resizer.html](http://localhost:3000/resizer.html).
@@ -104,6 +104,11 @@ The resizer tool allows users to input the dimensions for resizing an image:
 6. The URL of the resized image will be printed in a text box (e.g., `http://localhost:3000/resize/encenadaport.jpg?width=300&height=200`) under the Thumbnail,
    this URL can be used to reuse the thumbnail in other pages
 
+#### Uploading JPegs
+
+The new version allows user to upload files to the application, for this just chose the file and hit the upload button.
+
+After the picture is uploaded the Gallery will navigate to that picture automatically.
 
 ---
 

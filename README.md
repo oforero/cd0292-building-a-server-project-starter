@@ -26,9 +26,7 @@ This project provides a simple Node.js web server with the following features:
 
 ## Setup Instructions
 
-### For Non-Nix Users
-
-#### Get the code
+### Get the code
 1. Clone the repository:
    ```bash
    git clone https://github.com/oforero/cd0292-building-a-server-project-starter.git
@@ -40,7 +38,7 @@ This project provides a simple Node.js web server with the following features:
    nix develop
    ```
 
-#### Install dependencies, build and start the application
+### Install dependencies, build and start the application
 2. Install dependencies:
    ```bash
    yarn install
@@ -56,10 +54,10 @@ This project provides a simple Node.js web server with the following features:
    yarn start
    ```
 
-#### Use the application
+### Use the application
 5. Open your browser and navigate to:
    - **Gallery Page**: [http://localhost:3000](http://localhost:3000)
-   - **Resizer Page**: [http://localhost:3000/resize.html](http://localhost:3000/resizer.html)
+   - **Resizer Page**: [http://localhost:3000/resizer.html](http://localhost:3000/resizer.html)
 
 
 ### Running The Tests
@@ -95,7 +93,7 @@ The gallery page displays all the images in the `images` folder. Simply navigate
 ### **Image Resizer Page**
 The resizer tool allows users to input the dimensions for resizing an image:
 
-1. Navigate to the Resizer Page: [http://localhost:3000/resize.html](http://localhost:3000/resize.html).
+1. Navigate to the Resizer Page: [http://localhost:3000/resizer.html](http://localhost:3000/resizer.html).
 
     ![image](udacity-typescript-image-project-screenshot-2.jpg)
 

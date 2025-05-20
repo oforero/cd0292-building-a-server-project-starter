@@ -12,7 +12,6 @@ describe('resizeImage', () => {
 
   it('should resize and save the image when it is not cached', async () => {
     spyOn(fs, 'existsSync').and.callFake((filePath) => {
-      // Simulate the file does not exist
       console.info('Simulating file does not exist: ', filePath);
       return false;
     });
@@ -45,7 +44,6 @@ describe('resizeImage', () => {
   it('should return the cached image when it already exists', async () => {
     spyOn(fs, 'mkdirSync').and.callFake(() => undefined);
     spyOn(fs, 'existsSync').and.callFake((filePath) => {
-      // Simulate the file does not exist
       console.info('Simulating file does exist: ', filePath);
       return true;
     });

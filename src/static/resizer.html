@@ -157,6 +157,16 @@
             }
           );
 
+          // 🛑 Validate the file type before uploading
+          if (
+            !uploadedFile ||
+            !uploadedFile.type ||
+            uploadedFile.type !== 'image/jpeg'
+          ) {
+            alert('Please upload a valid JPG image.');
+            return;
+          }
+
           if (response.ok) {
             console.info('Upload successful');
             // Refetch the images and set the uploaded one as current

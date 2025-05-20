@@ -26,50 +26,21 @@ This project provides a simple Node.js web server with the following features:
 
 ## Setup Instructions
 
-### For Nix Users
+### For Non-Nix Users
+
+#### Get the code
 1. Clone the repository:
    ```bash
    git clone https://github.com/oforero/cd0292-building-a-server-project-starter.git
    cd cd0292-building-a-server-project-starter
    ```
 
-2. Enter the Nix shell with the provided flake:
+1.a. (Only if you use NIX) Enter the Nix shell with the provided flake:
    ```bash
    nix develop
    ```
 
-3. Install dependencies:
-   ```bash
-   yarn install
-   ```
-
-4. Build the project:
-   ```bash
-   yarn build
-   ```
-
-5. Start the server:
-   ```bash
-   yarn start
-   ```
-
-6. Open your browser and navigate to:
-   - **Gallery Page**: [http://localhost:3000](http://localhost:3000)
-
-      ![image](udacity-typescript-image-project-screenshot-1.jpg)
-
-   - **Resizer Page**: [http://localhost:3000/resize.html](http://localhost:3000/resize.html)
-
-      ![image](udacity-typescript-image-project-screenshot-2.jpg)
-
-### For Non-Nix Users
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/oforero/cd0292-building-a-server-project-starter.git
-   cd cd0292-building-a-server-project-starter
-   ```
-
+#### Install dependencies, build and start the application
 2. Install dependencies:
    ```bash
    yarn install
@@ -85,9 +56,11 @@ This project provides a simple Node.js web server with the following features:
    yarn start
    ```
 
+#### Use the application
 5. Open your browser and navigate to:
    - **Gallery Page**: [http://localhost:3000](http://localhost:3000)
-   - **Resizer Page**: [http://localhost:3000/resize.html](http://localhost:3000/resize.html)
+   - **Resizer Page**: [http://localhost:3000/resize.html](http://localhost:3000/resizer.html)
+
 
 ### Running The Tests
 
